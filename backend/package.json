@@ -1,0 +1,26 @@
+{
+  "name": "testparty-backend",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "backpack",
+    "build": "backpack build"
+  },
+  "dependencies": {
+    "backpack-core": "^0.8.3",
+    "catbox-redis": "^4.2.4",
+    "dotenv": "^7.0.0",
+    "hapi": "^18.1.0",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  }
+}
