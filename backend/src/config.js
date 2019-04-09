@@ -6,7 +6,8 @@ dotenv.config()
 const redis = {
   host: 'localhost' || process.env.REDIS_HOST,
   port: 6379 || process.env.REDIS_PORT,
-  auth: process.env.REDIS_AUTH
+  auth: process.env.REDIS_AUTH,
+  prefix: 'testparty'
 }
 
 const steam = {
@@ -22,7 +23,7 @@ const server = {
       provider: {
         constructor: catbox,
         options: {
-          partition: 'testparty',
+          partition: redis.prefix,
           ...redis
         }
       }
