@@ -27,9 +27,7 @@ export default class SteamSpy {
       if (!multiplayerState) await redis.rpushAsync(REDIS_QUEUE, appID)
 
       return isMultiplayer
-    } catch (error) {
-      console.log('steamspy isMultiplayer', error)
-    }
+    } catch (error) {}
 
     return false
   }

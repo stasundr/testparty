@@ -16,7 +16,8 @@
     "hapi": "^18.1.0",
     "limiter": "^1.1.4",
     "lodash": "^4.17.11",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "prettier": "^1.16.4"
