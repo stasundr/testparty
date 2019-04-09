@@ -11,7 +11,7 @@ export default function mountRoutes(server) {
     options: {
       cache: {
         cache: 'cache',
-        expiresIn: 60 * 1000, // 60 *
+        expiresIn: 60 * 60 * 1000,
         generateTimeout: 6 * 1000
       }
     }
@@ -23,7 +23,7 @@ export default function mountRoutes(server) {
     options: {
       cache: {
         cache: 'cache',
-        expiresIn: 60 * 1000, // 30 * 24 * 60 *
+        expiresIn: 30 * 24 * 60 * 60 * 1000,
         generateTimeout: 6 * 1000
       }
     }
