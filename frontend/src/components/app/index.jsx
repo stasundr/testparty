@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import DescriptionSection from './description'
 import NewPlayerForm from './new_player_form'
-import { fetchProfile } from '../../api'
+import TeamSection from '../team_section'
+import GamesSection from '../games_section'
 
 export default function App() {
   const [players, setPlayers] = useState([])
@@ -11,9 +12,9 @@ export default function App() {
     <Container>
       <Style />
       <DescriptionSection />
-      <NewPlayerForm onSubmit={() => {}} />
-      <h1>TeamSection</h1>
-      <h1>GamesSection</h1>
+      <NewPlayerForm players={players} setPlayers={setPlayers} />
+      <TeamSection players={players} />
+      <GamesSection players={players} />
     </Container>
   )
 }
