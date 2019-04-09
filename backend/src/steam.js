@@ -50,6 +50,8 @@ export default class Steam {
   }
 
   async getPlayerInfo(id) {
+    const info = {}
+
     try {
       const steamID = await this.getSteamID(id)
       if (!steamID) return {}
@@ -57,12 +59,12 @@ export default class Steam {
       const url = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${key}&steamids=${steamID}`
       const response = await axios.get(url)
 
-      info.avatar = get(response, 'data.response.players.0.avatarfull')
-      info.name = get(response, 'data.response.players.0.personaname')
+      info.avatar = _.get(response, 'data.response.players.0.avatarfull')
+      info.name = _.get(response, 'data.response.players.0.personaname')
       info.id = steamID
     } catch (error) {}
 
-    return {}
+    return info
   }
 
   async getPlayerGames(id) {
@@ -70,7 +72,7 @@ export default class Steam {
       const steamID = await this.getSteamID(id)
       const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${key}&steamid=${steamID}&format=json`
       const response = await axios.get(url)
-      const games = get(response, 'data.response.games', [])
+      const games = _.get(response, 'data.response.games', [])
       const appIDs = games.map(({ appid }) => appid)
       const multiplayerIDs = await this.steamspy.filterMultiplayerApps(appIDs)
       const multiplayerGames = games.filter(
@@ -92,9 +94,9 @@ export default class Steam {
       const url = `http://store.steampowered.com/api/appdetails/?appids=${appID}`
       const response = await axios.get(url)
 
-      info.success = get(response, `data.${appID}.success`, false)
-      info.name = get(response, `data.${appID}.data.name`)
-      info.image = get(response, `data.${appID}.data.header_image`)
+      info.success = _.get(response, `data.${appID}.success`, false)
+      info.name = _.get(response, `data.${appID}.data.name`)
+      info.image = _.get(response, `data.${appID}.data.header_image`)
     } catch (error) {}
 
     return info
