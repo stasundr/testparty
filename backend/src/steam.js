@@ -70,7 +70,7 @@ export default class Steam {
   async getPlayerGames(id) {
     try {
       const steamID = await this.getSteamID(id)
-      const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${key}&steamid=${steamID}&format=json`
+      const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${key}&steamid=${steamID}&include_played_free_games=1&format=json`
       const response = await axios.get(url)
       const games = _.get(response, 'data.response.games', [])
       const appIDs = games.map(({ appid }) => appid)
