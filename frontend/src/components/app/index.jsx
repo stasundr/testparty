@@ -13,7 +13,7 @@ export default function App() {
       <Style />
       <DescriptionSection />
       <NewPlayerForm players={players} setPlayers={setPlayers} />
-      <TeamSection players={players} />
+      <TeamSection players={players} setPlayers={setPlayers} />
       <GamesSection players={players} />
     </Container>
   )

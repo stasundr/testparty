@@ -1,18 +1,29 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import _ from 'lodash'
+
+function declOfNum(number, titles) {
+  const cases = [2, 0, 1, 1, 1, 2];
+  return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+}
 
 export default function PlayerCard(props) {
-  const { avatar, name, empty } = props
+  const { player, onClick } = props
+  const avatar = _.get(player, 'info.avatar')
+  const name = _.get(player, 'info.name')
+  const games = _.get(player, 'games.length')
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Card>
         <AvatarContainer>
-          <Avatar src={avatar} grayscale={empty} />
+          <Avatar src={avatar} grayscale={!games} />
         </AvatarContainer>
-        <Title>
-          <p>{name}</p>
-        </Title>
+        <Text>
+          {name}
+          <br/>
+          {games} {declOfNum(games, ['игра', 'игры', 'игр'])}
+        </Text>
       </Card>
     </Container>
   )
@@ -54,12 +65,10 @@ const AvatarContainer = styled.div`
   border-radius: 40px;
 `
 
-const Title = styled.div`
+const Text = styled.div`
+  margin-top: 5px;
   text-align: center;
-  color: white;
   border-radius: 0px 0px 40px 40px;
   font-weight: bold;
-  font-size: 20px;
-  margin-top: -60px;
-  height: 20px;
+  font-size: 16px;
 `

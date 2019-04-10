@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import PlayerCard from './player_card'
 
 export default function TeamSection(props) {
-  const { players } = props
-  const cards = players.map(({ info, games }) => (
-    <PlayerCard key={info.id} avatar={info.avatar} name={info.name} empty={!games.length}/>
+  const { players, setPlayers } = props
+  const removePlayer = index => setPlayers(players.filter((p, i) => i !== index))
+  const cards = players.map((player, index) => (
+    <PlayerCard key={player.info.id} player={player} onClick={() => removePlayer(index)}/>
   ))
 
   return <Container>{cards}</Container>
