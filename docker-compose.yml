@@ -6,9 +6,14 @@ services:
     restart: always
     depends_on:
       - redis
+    ports:
+      - 4004:4004
     labels:
       traefik.port: 4004
       traefik.frontend.rule: Host:api.jilio.pw
+    environment:
+      - TESTPARTY_HOST=backend
+      - REDIS_HOST=redis
 
   frontend:
     build: ./frontend
@@ -23,7 +28,7 @@ services:
     image: redis
     restart: always
     ports:
-      - "6379:6379"
+      - 6379:6379
 
 networks:
   default:

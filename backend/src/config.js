@@ -17,6 +17,9 @@ const steam = {
 const server = {
   host: process.env.TESTPARTY_HOST || 'localhost',
   port: process.env.TESTPARTY_PORT || 4004,
+  routes: {
+    cors: true
+  },
   cache: [
     {
       name: 'cache',
