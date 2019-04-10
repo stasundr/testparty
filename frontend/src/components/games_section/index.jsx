@@ -1,43 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import _ from 'lodash'
 import bluebird from 'bluebird'
+import { rateCommonGames } from './utils'
 import { fetchGameInfo } from '../../api'
-
-function rateCommonGames(players) {
-  const appIDs = players.map(player =>
-    _.chain(player)
-      .get('games', [])
-      .map('appid')
-      .value()
-  )
-  const commonIDs = _.intersection(...appIDs)
-  const games = commonIDs
-    .map(id =>
-      players
-        .map(player =>
-          _.chain(player)
-            .get('games', [])
-            .filter({ appid: id })
-            .get(0)
-            .value()
-        )
-        .reduce(
-          (result, current) => ({
-            appid: current.appid,
-            top: result.top * (_.get(current, 'playtime_forever', 0) + 1),
-            bottom: result.bottom + _.get(current, 'playtime_forever', 0)
-          }),
-          { top: 1, bottom: 1 }
-        )
-    )
-    .map(({ appid, top, bottom }) => ({ appid, score: top / bottom }))
-
-  return _.chain(games)
-    .sortBy('score')
-    .reverse()
-    .value()
-}
 
 export default function GamesSection(props) {
   const { players } = props
@@ -56,7 +21,7 @@ export default function GamesSection(props) {
   return (
     <Container>
       {games.map(game => (
-        <GameCardContainer>
+        <GameCardContainer key={game.name}>
           <Image src={game.image} />
         </GameCardContainer>
       ))}

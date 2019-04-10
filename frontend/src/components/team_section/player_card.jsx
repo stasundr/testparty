@@ -1,14 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export default function PlayerCard(props) {
-  const { avatar, name } = props
+  const { avatar, name, empty } = props
 
   return (
     <Container>
       <Card>
         <AvatarContainer>
-          <Avatar src={avatar} />
+          <Avatar src={avatar} grayscale={empty} />
         </AvatarContainer>
         <Title>
           <p>{name}</p>
@@ -42,6 +42,10 @@ const Avatar = styled.img`
   height: inherit;
   border-radius: 20px;
   object-fit: cover;
+  
+  ${props => props.grayscale && css`
+    filter: grayscale(100%);
+  `}
 `
 
 const AvatarContainer = styled.div`

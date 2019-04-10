@@ -8,7 +8,7 @@ export default function NewPlayerForm(props) {
   const [text, setText] = useState('')
   const updateText = e => setText(e.target.value)
 
-  const onClick = async () => {
+  const handleClick = async () => {
     try {
       const profile = await fetchProfile(text)
       if (profile) {
@@ -19,15 +19,24 @@ export default function NewPlayerForm(props) {
     } catch (error) {}
   }
 
+  const handleKeyPress = async (e) => {
+    if (e.charCode === 13) {
+      await handleClick()
+    }
+  }
+
   return (
     <Container>
-      <Input
-        onChange={updateText}
-        value={text}
-        placeholder="Имя профиля или ссылка на профиль в Steam"
-        autoFocus
-      />
-      <Button onClick={onClick}>Добавить</Button>
+      <Form>
+        <Input
+          value={text}
+          placeholder="Имя профиля или ссылка на профиль в Steam"
+          autoFocus
+          onChange={updateText}
+          onKeyPress={handleKeyPress}
+        />
+        <Button onClick={handleClick}>Добавить</Button>
+      </Form>
     </Container>
   )
 }
@@ -38,11 +47,16 @@ const Container = styled.div`
   align-items: center;
 `
 
+const Form = styled.div`
+  display:flex;
+  flex-direction: row;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.15);
+`
+
 const Input = styled.input`
   width: 450px;
   font: inherit;
   font-size: 14px;
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.15);
   border: none;
   outline: none;
   padding: 15px;
