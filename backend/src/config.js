@@ -4,8 +4,8 @@ import catbox from 'catbox-redis'
 dotenv.config()
 
 const redis = {
-  host: 'localhost' || process.env.REDIS_HOST,
-  port: 6379 || process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST || 'localhost',
+  port: process.env.REDIS_PORT || 6379,
   auth: process.env.REDIS_AUTH,
   prefix: 'testparty'
 }
@@ -15,8 +15,8 @@ const steam = {
 }
 
 const server = {
-  host: 'localhost' || process.env.TESTPARTY_HOST,
-  port: 4004 || process.env.TESTPARTY_PORT,
+  host: process.env.TESTPARTY_HOST || 'localhost',
+  port: process.env.TESTPARTY_PORT || 4004,
   cache: [
     {
       name: 'cache',

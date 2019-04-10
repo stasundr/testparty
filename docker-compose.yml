@@ -4,8 +4,8 @@ services:
   backend:
     build: ./backend
     restart: always
-    env_file:
-      - ./backend/.env
+    depends_on:
+      - redis
     labels:
       traefik.port: 4004
       traefik.frontend.rule: Host:api.jilio.pw
@@ -16,6 +16,8 @@ services:
     labels:
       traefik.port: 80
       traefik.frontend.rule: Host:jilio.pw
+    environment:
+      - TESTPARTY_HOST=backend
 
   redis:
     image: redis
